@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }} - My Blog</title>
+    <title>{{ action }} Post - My Blog</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -25,17 +25,17 @@
         </div>
         {% endif %}
         {% endwith %}
-        <article class="post-detail">
-            <h1>{{ post.title }}</h1>
-            <p>{{ post.content }}</p>
-            <div class="post-actions">
-                <a href="/edit/{{ post.id }}" class="btn small">Edit</a>
-                <form action="/delete/{{ post.id }}" method="post" style="display:inline;">
-                    <button type="submit" class="btn small danger" onclick="return confirm('Delete this post?');">Delete</button>
-                </form>
+        <h1>{{ action }} Post</h1>
+        <form method="post" class="post-form">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="{{ post.title|default('') }}" required>
+            <label for="content">Content</label>
+            <textarea id="content" name="content" rows="8" required>{{ post.content|default('') }}</textarea>
+            <div class="form-actions">
+                <button type="submit" class="btn primary">{{ action }} Post</button>
+                <a href="/" class="btn">Cancel</a>
             </div>
-            <a href="/" class="back-link">&larr; Back to Home</a>
-        </article>
+        </form>
     </main>
 </body>
 </html> 
